@@ -1,0 +1,39 @@
+model:
+  vision_encoder:
+    type: "vit_base_patch16_224.dino"
+    pretrained: true
+    freeze_backbone: false
+    unfreeze_last_n_blocks: 0
+    drop_rate: 0.0
+    drop_path_rate: 0.1
+  
+  text_encoder:
+    type: "clip"
+    model_name: "openai/clip-vit-base-patch16"
+    freeze_text_encoder: true
+
+  prompt_encoder:
+    dropout: 0.1
+    context_exchange: true
+    num_heads: 12
+    context_dropout: 0.2
+    
+  decoder:
+    type: "deeplabv3"
+    num_classes: 7
+    hidden_dim: 768
+    dropout: 0.1
+    aspp_out: 256
+    atrous_rates: [6, 12, 18]
+    
+  cross_attention:
+    num_heads: 12
+    dropout: 0.2
+
+  prompt_training:
+    focus_prob: 0.5
+    focus_classes: [1]
+
+hyperparameters:
+  image_size: 512
+  max_seq_len: 77

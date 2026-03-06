@@ -1,0 +1,30 @@
+training:
+  batch_size: 8
+  grad_accum_steps: 8
+  augment: true
+  attn_supervision_weight: 0.05
+  attn_logits_weight: 0.5
+  learning_rate: 1.0e-5
+  weight_decay: 5.0e-4
+  num_epochs: 20
+  device: "cuda"
+  num_workers: 2
+  backbone_lr_mult: 0.1
+  freeze_backbone_epochs: 0
+  label_smoothing: 0.0
+  focal_gamma: 2.0
+  dice_weight: 1.0
+  class_weights: [0.5, 1.2, 1.0, 1.2, 3.0, 1.5, 1.0]
+  early_stopping:
+    patience: 5
+    min_delta: 0.0
+  optimizer:
+    type: "adamw"
+  scheduler:
+    type: "cosine_annealing"
+    T_max: 20
+    
+  logging:
+    use_wandb: false
+    log_interval: 10
+    save_dir: "experiments/checkpoints"

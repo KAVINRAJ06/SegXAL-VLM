@@ -1,0 +1,28 @@
+active_learning:
+  stage_fractions: [0.10, 0.175, 0.25, 0.325, 0.40]
+  total_rounds: 5
+  budget_per_round: 0 # Ignored when stage_fractions is set
+  
+  strategy:
+    name: "mem"
+    alpha: 0.5
+    adaptive: true
+    smooth_kernel: 7
+    smooth_sigma: 2.0
+    query_ratio: 1.0
+    balance_domains: true
+    
+  oracle:
+    type: "machine" # or "hybrid"
+    accuracy: 0.95 # Simulating oracle error if machine
+
+  visualization:
+    enabled: true
+    max_samples: 8
+    
+  data:
+    initial_labeled_ratio: 0.1
+    unlabeled_pool_size: 1000000000
+    use_filesystem_pool: true
+    pool_root: "data/LoveDA/Pool"
+    reset_pool: true
